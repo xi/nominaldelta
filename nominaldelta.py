@@ -58,6 +58,8 @@ def date_diff(a, b):
 
 
 def dt_diff(a, b):
+    if a > b:
+        return -dt_diff(b, a)
     delta = date_diff(a, b)
     seconds = b.timestamp() - (a + delta).timestamp()
     return delta + NominalDelta(seconds=seconds)
