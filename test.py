@@ -1,6 +1,7 @@
 import unittest
 from datetime import date
 from datetime import datetime
+
 from zoneinfo import ZoneInfo
 
 from nominaldelta import NominalDelta
@@ -44,7 +45,7 @@ class GeneralTests(unittest.TestCase):
     def test_hashable(self):
         try:
             {NominalDelta(minutes=1): 'test'}
-        except Exception:
+        except Exception:  # pragma: no cover
             self.fail('NominalDelta() failed to hash!')
 
     def test_boolean(self):
@@ -162,6 +163,7 @@ class AdditionTests(unittest.TestCase):
         self.assertEqual(date(2021, 2, 27) + NominalDelta(months=1), date(2021, 3, 27))
         self.assertEqual(date(2021, 4, 29) + NominalDelta(months=1), date(2021, 5, 29))
         self.assertEqual(date(2021, 5, 30) + NominalDelta(months=1), date(2021, 6, 30))
+        self.assertEqual(date(2021, 11, 1) + NominalDelta(months=1), date(2021, 12, 1))
 
     def test_add_date_negative_months(self):
         self.assertEqual(date(2003, 1, 1) + NominalDelta(months=-2), date(2002, 11, 1))
