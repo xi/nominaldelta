@@ -90,6 +90,10 @@ class TestNominalDelta(unittest.TestCase):
             datetime(2019, 10, 27, 2, 59, tzinfo=tz) + NominalDelta(minutes=2),
             datetime(2019, 10, 27, 2, 1, fold=True, tzinfo=tz),
         )
+        self.assertEqual(
+            datetime(2019, 3, 30, 2, 30, tzinfo=tz) + NominalDelta(days=1),
+            datetime(2019, 3, 31, 3, 30, tzinfo=tz),
+        )
 
     def test_rsub_date(self):
         self.assertEqual(
