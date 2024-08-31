@@ -85,5 +85,13 @@ many days can be added on top of the month. Last, the remaining difference in
 seconds is calculated. This approach is called "top heavy" because it
 prioritizes larger units over smaller ones.
 
+If you prefer to get a difference in days or seconds, you can derive them from
+the absolute differences:
+
+```python
+delta = NominalDelta(days=dt1.toordinal() - dt2.toordinal())
+delta = NominalDelta(seconds=dt1.timestamp() - dt2.timestamp())
+```
+
 [1]: https://docs.python.org/3/library/datetime.html
 [2]: https://github.com/dateutil/dateutil
