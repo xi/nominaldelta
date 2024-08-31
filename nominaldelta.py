@@ -87,6 +87,12 @@ class NominalDelta:
             f'seconds={self.seconds})'
         )
 
+    def __hash__(self):
+        return hash((self.months, self.days, self.seconds))
+
+    def __bool__(self):
+        return bool(self.months or self.days or self.seconds)
+
     def __eq__(self, other: Self) -> Self:
         if isinstance(other, NominalDelta):
             return (
