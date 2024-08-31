@@ -402,3 +402,10 @@ class DiffTests(unittest.TestCase):
             ),
             NominalDelta(days=989, seconds=75287),
         )
+
+    def test_inheritance(self):
+        class ChildClass(NominalDelta):
+            pass
+
+        delta = ChildClass.diff(date(1970, 1, 15), date(1970, 2, 15))
+        self.assertEqual(type(delta), ChildClass)
