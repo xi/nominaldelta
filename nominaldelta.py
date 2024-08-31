@@ -18,18 +18,18 @@ def date_add(dt, delta):
     day = dt.day
     while day > 0:
         try:
-            tmp = date(year, month, day)
+            tmp = dt.__class__(year, month, day)
             break
         except ValueError:
             day -= 1
 
-    return date.fromordinal(tmp.toordinal() + delta.days)
+    return dt.__class__.fromordinal(tmp.toordinal() + delta.days)
 
 
 def dt_add(dt, delta):
     d = date_add(dt.date(), delta)
     offset = dt.timestamp() - date_to_timestamp(dt.date())
-    return datetime.fromtimestamp(
+    return dt.__class__.fromtimestamp(
         date_to_timestamp(d) + offset + delta.seconds, tz=dt.tzinfo
     )
 
@@ -104,7 +104,7 @@ class NominalDelta:
 
     def __add__(self: Self, other: Self) -> Self:
         if isinstance(other, NominalDelta):
-            return NominalDelta(
+            return self.__class__(
                 months=self.months + other.months,
                 days=self.days + other.days,
                 seconds=self.seconds + other.seconds,
@@ -113,7 +113,7 @@ class NominalDelta:
 
     def __sub__(self: Self, other: Self) -> Self:
         if isinstance(other, NominalDelta):
-            return NominalDelta(
+            return self.__class__(
                 months=self.months - other.months,
                 days=self.days - other.days,
                 seconds=self.seconds - other.seconds,
@@ -121,11 +121,11 @@ class NominalDelta:
         return NotImplemented
 
     def __neg__(self: Self) -> Self:
-        return NominalDelta() - self
+        return self.__class__() - self
 
     def __mul__(self: Self, factor: int) -> Self:
         if isinstance(factor, int):
-            return NominalDelta(
+            return self.__class__(
                 months=self.months * factor,
                 days=self.days * factor,
                 seconds=self.seconds * factor,
