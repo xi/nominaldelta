@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nominaldelta"
+version = "0.0.0"
+description = "nominal difference of date/datetime"
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["datetime"]
+authors = [
+    {name = "Tobias Bengfort", email = "tobias.bengfort@posteo.de"}
+]
+
+[project.urls]
+Homepage = "https://github.com/xi/nominaldelta"
+
+[tool.setuptools]
+py-modules = ["nominaldelta"]
