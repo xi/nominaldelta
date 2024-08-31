@@ -386,3 +386,19 @@ class DiffTests(unittest.TestCase):
             ),
             NominalDelta(months=-1, seconds=-1),
         )
+
+    def test_diff_no_allow_months(self):
+        self.assertEqual(
+            NominalDelta.diff(
+                date(1970, 1, 15), date(1970, 2, 15), allow_months=False
+            ),
+            NominalDelta(days=31),
+        )
+        self.assertEqual(
+            NominalDelta.diff(
+                datetime(2001, 1, 1),
+                datetime(2003, 9, 17, 20, 54, 47),
+                allow_months=False,
+            ),
+            NominalDelta(days=989, seconds=75287),
+        )

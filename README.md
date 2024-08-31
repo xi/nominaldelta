@@ -77,7 +77,7 @@ that and seconds are added last.
 
 When adding to a `date`, seconds are ignored.
 
-### `NominalDelta.diff(a, b)`
+### `NominalDelta.diff(a, b, allow_months=True)`
 
 Calculate the delta between two `date` or `datetime` objects. This will first
 check how many months can be added without overshooting. Then it will check how
@@ -85,11 +85,10 @@ many days can be added on top of the month. Last, the remaining difference in
 seconds is calculated. This approach is called "top heavy" because it
 prioritizes larger units over smaller ones.
 
-If you prefer to get a difference in days or seconds, you can derive them from
-the absolute differences:
+Set `allow_months=False` if you only want to get days and seconds. If you only
+want seconds, use the absolute difference instead:
 
 ```python
-delta = NominalDelta(days=dt1.toordinal() - dt2.toordinal())
 delta = NominalDelta(seconds=dt1.timestamp() - dt2.timestamp())
 ```
 

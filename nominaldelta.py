@@ -51,18 +51,20 @@ def binary_search(a, b, delta):
     return lower * delta
 
 
-def date_diff(a, b):
+def date_diff(a, b, *, allow_months=True):
     if a > b:
         return -date_diff(b, a)
-    delta = binary_search(a, b, NominalDelta(months=1))
+    delta = NominalDelta()
+    if allow_months:
+        delta += binary_search(a, b, NominalDelta(months=1))
     days = b.toordinal() - (a + delta).toordinal()
     return delta + NominalDelta(days=days)
 
 
-def dt_diff(a, b):
+def dt_diff(a, b, *, allow_months=True):
     if a > b:
         return -dt_diff(b, a)
-    delta = date_diff(a, b)
+    delta = date_diff(a, b, allow_months=allow_months)
     seconds = b.timestamp() - (a + delta).timestamp()
     if seconds < 0:
         delta -= NominalDelta(days=1)
@@ -155,9 +157,9 @@ class NominalDelta:
         return (-self).__radd__(other)
 
     @classmethod
-    def diff(cls: type[Self], a: date, b: date) -> Self:
+    def diff(cls: type[Self], a: date, b: date, *, allow_months: bool = True) -> Self:
         if isinstance(a, datetime) and isinstance(b, datetime):
-            return dt_diff(a, b)
+            return dt_diff(a, b, allow_months=allow_months)
         elif isinstance(a, date) and isinstance(b, date):
-            return date_diff(a, b)
+            return date_diff(a, b, allow_months=allow_months)
         raise TypeError('Unsupported types')
