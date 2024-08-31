@@ -38,11 +38,10 @@ def dt_add(dt, delta):
 
 
 def binary_search(a, b, delta):
-    lower = 0
     upper = 1
     while a + delta * upper <= b:
-        lower = upper
         upper <<= 1
+    lower = upper >> 1
     while lower + 1 < upper:
         tmp = (lower + upper) // 2
         if a + delta * tmp <= b:
