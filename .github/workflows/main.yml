@@ -1,0 +1,12 @@
+on: [push]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+    - run: python3 -m pip install ruff
+    - name: lint
+      run: ruff check
+    - name: test
+      run: python3 -m unittest
