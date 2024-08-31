@@ -62,6 +62,9 @@ def dt_diff(a, b):
         return -dt_diff(b, a)
     delta = date_diff(a, b)
     seconds = b.timestamp() - (a + delta).timestamp()
+    if seconds < 0:
+        delta -= NominalDelta(days=1)
+        seconds = b.timestamp() - (a + delta).timestamp()
     return delta + NominalDelta(seconds=seconds)
 
 
