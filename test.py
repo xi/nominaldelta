@@ -7,10 +7,6 @@ from nominaldelta import NominalDelta
 
 
 class TestNominalDelta(unittest.TestCase):
-    def test_years(self):
-        self.assertEqual(NominalDelta(years=3, months=15).years, 4)
-        self.assertEqual(NominalDelta(years=3, months=-1).years, 2)
-
     def test_weeks(self):
         self.assertEqual(NominalDelta(weeks=2, days=2).days, 16)
         self.assertEqual(NominalDelta(weeks=2, days=-1).days, 13)

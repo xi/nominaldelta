@@ -87,10 +87,6 @@ class NominalDelta:
             f'seconds={self.seconds})'
         )
 
-    @property
-    def years(self: Self) -> int:
-        return self.months // 12
-
     def __eq__(self, other: Self) -> Self:
         if isinstance(other, NominalDelta):
             return (
