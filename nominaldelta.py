@@ -97,10 +97,10 @@ class NominalDelta:
     def __hash__(self):
         return hash((self.months, self.days, self.seconds))
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         return bool(self.months or self.days or self.seconds)
 
-    def __eq__(self, other: Self) -> Self:
+    def __eq__(self, other) -> bool:
         if isinstance(other, NominalDelta):
             return (
                 self.months == other.months
@@ -109,7 +109,7 @@ class NominalDelta:
             )
         return NotImplemented
 
-    def __add__(self: Self, other: Self) -> Self:
+    def __add__(self: Self, other) -> Self:
         if isinstance(other, NominalDelta):
             return self.__class__(
                 months=self.months + other.months,
@@ -118,7 +118,7 @@ class NominalDelta:
             )
         return NotImplemented
 
-    def __sub__(self: Self, other: Self) -> Self:
+    def __sub__(self: Self, other) -> Self:
         if isinstance(other, NominalDelta):
             return self.__class__(
                 months=self.months - other.months,
@@ -153,7 +153,7 @@ class NominalDelta:
         return (-self).__radd__(other)
 
     @classmethod
-    def diff(cls, a: date, b: date):
+    def diff(cls: type[Self], a: date, b: date) -> Self:
         if isinstance(a, datetime) and isinstance(b, datetime):
             return dt_diff(a, b)
         elif isinstance(a, date) and isinstance(b, date):
