@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import TypeVar
 
 Self = TypeVar('Self', bound='NominalDelta')
+Date = TypeVar('Date', bound=date)
 
 
 def date_to_timestamp(d):
@@ -146,18 +147,18 @@ class NominalDelta:
     def __rmul__(self: Self, factor: int) -> Self:
         return self * factor
 
-    def __radd__(self: Self, other: date) -> date:
+    def __radd__(self: Self, other: Date) -> Date:
         if isinstance(other, datetime):
             return dt_add(other, self)
         elif isinstance(other, date):
             return date_add(other, self)
         return NotImplemented
 
-    def __rsub__(self: Self, other: date) -> date:
+    def __rsub__(self: Self, other: Date) -> Date:
         return (-self).__radd__(other)
 
     @classmethod
-    def diff(cls: type[Self], a: date, b: date, *, allow_months: bool = True) -> Self:
+    def diff(cls: type[Self], a: Date, b: Date, *, allow_months: bool = True) -> Self:
         if isinstance(a, datetime) and isinstance(b, datetime):
             return dt_diff(a, b, allow_months=allow_months)
         elif isinstance(a, date) and isinstance(b, date):
