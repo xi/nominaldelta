@@ -1,6 +1,8 @@
 from datetime import date
 from datetime import datetime
-from typing import Self
+from typing import TypeVar
+
+Self = TypeVar('Self', bound='NominalDelta')
 
 
 def date_to_timestamp(d):
