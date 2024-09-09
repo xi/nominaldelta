@@ -6,10 +6,6 @@ Self = TypeVar('Self', bound='NominalDelta')
 Date = TypeVar('Date', bound=date)
 
 
-def date_to_timestamp(d):
-    return datetime(d.year, d.month, d.day).timestamp()
-
-
 def date_add(dt, delta):
     total_months = dt.year * 12 + dt.month + delta.months
     year, month = divmod(total_months, 12)
@@ -31,9 +27,9 @@ def date_add(dt, delta):
 
 def dt_add(dt, delta):
     d = date_add(dt.date(), delta)
-    offset = dt.timestamp() - date_to_timestamp(dt.date())
+    tmp = dt.__class__.combine(d, dt.time(), tzinfo=dt.tzinfo)
     return dt.__class__.fromtimestamp(
-        date_to_timestamp(d) + offset + delta.seconds, tz=dt.tzinfo
+        tmp.timestamp() + delta.seconds, tz=dt.tzinfo
     )
 
 

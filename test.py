@@ -245,7 +245,7 @@ class AdditionTests(unittest.TestCase):
             datetime(2009, 9, 3, 0, 30, 30, 500000),
         )
 
-    def test_add_datetime_dst(self):
+    def test_add_datetime_dst_minutes(self):
         tz = ZoneInfo('Europe/Berlin')
         self.assertEqual(
             datetime(2019, 3, 31, 1, 59, tzinfo=tz) + NominalDelta(minutes=2),
@@ -257,6 +257,21 @@ class AdditionTests(unittest.TestCase):
         )
         self.assertEqual(
             datetime(2019, 3, 30, 2, 30, tzinfo=tz) + NominalDelta(days=1),
+            datetime(2019, 3, 31, 3, 30, tzinfo=tz),
+        )
+
+    def test_add_datetime_dst_days(self):
+        tz = ZoneInfo('Europe/Berlin')
+        self.assertEqual(
+            datetime(2019, 3, 30, 1, 30, tzinfo=tz) + NominalDelta(days=1),
+            datetime(2019, 3, 31, 1, 30, tzinfo=tz),
+        )
+        self.assertEqual(
+            datetime(2019, 3, 30, 2, 30, tzinfo=tz) + NominalDelta(days=1),
+            datetime(2019, 3, 31, 3, 30, tzinfo=tz),
+        )
+        self.assertEqual(
+            datetime(2019, 3, 30, 3, 30, tzinfo=tz) + NominalDelta(days=1),
             datetime(2019, 3, 31, 3, 30, tzinfo=tz),
         )
 
