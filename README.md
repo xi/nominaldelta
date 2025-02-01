@@ -48,7 +48,7 @@ an issue if you think this should be published.
 
 ### `class NominalDelta(years, months, weeks, days, hours, minutes, seconds)`
 
-All values are optional and default to 0.
+All arguments are optional and default to 0.
 
 `NominalDelta` only stores months, days, and seconds. All other values are
 converted to one of them:
