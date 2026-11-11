@@ -7,7 +7,7 @@ name = "nominaldelta"
 version = "0.0.0"
 description = "nominal difference of date/datetime"
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
 keywords = ["datetime"]
 authors = [
     {name = "Tobias Bengfort", email = "tobias.bengfort@posteo.de"}
