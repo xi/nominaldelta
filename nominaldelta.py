@@ -61,7 +61,7 @@ class NominalDelta:
     ):
         for key in ['years', 'months', 'weeks', 'days', 'hours', 'minutes']:
             if not isinstance(locals()[key], int):
-                raise ValueError(f'{key} must be an int')
+                raise TypeError(f'{key} must be an int')
 
         self.months = years * 12 + months
         self.days = weeks * 7 + days

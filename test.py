@@ -35,11 +35,11 @@ class GeneralTests(unittest.TestCase):
         self.assertNotEqual(NominalDelta(hours=24), NominalDelta(days=1))
 
     def test_fractional_year(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             NominalDelta(years=1.5)
 
     def test_fractional_month(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             NominalDelta(months=1.5)
 
     def test_hashable(self):
