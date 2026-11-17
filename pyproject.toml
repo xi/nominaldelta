@@ -19,3 +19,6 @@ Homepage = "https://github.com/xi/nominaldelta"
 
 [tool.setuptools]
 py-modules = ["nominaldelta"]
+
+[tool.ruff.lint.isort]
+force-single-line = true

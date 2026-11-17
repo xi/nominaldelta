@@ -1,7 +1,6 @@
 import unittest
 from datetime import date
 from datetime import datetime
-
 from zoneinfo import ZoneInfo
 
 from nominaldelta import NominalDelta
@@ -45,7 +44,7 @@ class GeneralTests(unittest.TestCase):
     def test_hashable(self):
         try:
             {NominalDelta(minutes=1): 'test'}
-        except Exception:  # pragma: no cover
+        except Exception:  # noqa
             self.fail('NominalDelta() failed to hash!')
 
     def test_boolean(self):
